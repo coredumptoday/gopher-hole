@@ -1,5 +1,4 @@
-<div style="width: 800px">
-    <table border="0" style="width: 50%" align="center">
+<table border="0" style="width: 10%" align="center">
       <tr>
         <td><img src="https://img1.github.io/tmp/1.jpg" height="80" width="82"></td>
         <td><img src="https://img1.github.io/tmp/2.jpg" height="80" width="82"></td>
@@ -20,6 +19,5 @@
         <img src="https://img.shields.io/badge/Language-Golang-brightred.svg" /> 
         <img src="https://img.shields.io/badge/学习方式-在线阅读-brightgreen.svg" />
     </p>
-</div>
 
 # Gopher Hole
