@@ -1,10 +1,12 @@
+# 接口
+
 ```go
 type Hash interface {
-	io.Writer
-	Sum(b []byte) []byte
-	Reset()
-	Size() int
-	BlockSize() int
+    io.Writer
+    Sum(b []byte) []byte
+    Reset()
+    Size() int
+    BlockSize() int
 }
 ```
 
@@ -34,16 +36,14 @@ type Hash interface {
 
 作用：返回当前hash算法计算时底层数据分组的字节数
 
-
-
 除了`Hash`接口之外，hash函数还需要实现`src/encoding/encoding.go`中定义的两个接口，具体如下：
 
 ```go
 type BinaryMarshaler interface {
-	MarshalBinary() (data []byte, err error)
+    MarshalBinary() (data []byte, err error)
 }
 type BinaryUnmarshaler interface {
-	UnmarshalBinary(data []byte) error
+    UnmarshalBinary(data []byte) error
 }
 ```
 
