@@ -1,6 +1,6 @@
 # 前言
 
- ![](https://img.shields.io/badge/Language-Golang-brightred.svg) ![](https://img.shields.io/badge/学习方式-在线阅读-brightgreen.svg) ![](https://img.shields.io/github/stars/coredumptoday/gopherhole.svg)
+![](https://img.shields.io/badge/Language-Golang-brightred.svg) ![](https://img.shields.io/badge/学习方式-在线阅读-brightgreen.svg) ![](https://img.shields.io/github/stars/coredumptoday/gopherhole.svg)
 
 {% hint style="success" %}
 aaa
@@ -10,12 +10,11 @@ aaa
 {% tab title="Plain Text" %}
 ```text
 dfsdf
-
 ```
 {% endtab %}
 
 {% tab title="" %}
-```
+```text
 
 ```
 {% endtab %}
@@ -56,7 +55,7 @@ $$
 
 {% endapi-method-response-example-description %}
 
-```
+```text
 
 ```
 {% endapi-method-response-example %}
@@ -64,4 +63,5 @@ $$
 {% endapi-method-spec %}
 {% endapi-method %}
 
-<img src="https://ghbtns.com/github-btn.html?user=coredumptoday&repo=gopherhole&type=star&count=true" width="150" height="20" title="GitHub" />
+![](https://ghbtns.com/github-btn.html?user=coredumptoday&repo=gopherhole&type=star&count=true)
+
