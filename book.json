@@ -1,0 +1,23 @@
+{
+    "plugins":[
+        "github-buttons"
+    ],
+    "pluginsConfig":{
+        "github-buttons":{
+            "buttons":[
+                {
+                    "user":"coredumptoday",
+                    "repo":"gopherhole",
+                    "type":"star",
+                    "size":"large"
+                },
+                {
+                    "user":"coredumptoday",
+                    "type":"follow",
+                    "width":"230",
+                    "count":false
+                }
+            ]
+        }
+    }
+}
