@@ -1,5 +1,4 @@
 # 前言
-<iframe src="https://ghbtns.com/github-btn.html?user=coredumptoday&repo=gopherhole&type=star&count=true" frameborder="0" scrolling="0" width="150" height="20" title="GitHub"></iframe>
 
  ![](https://img.shields.io/badge/Language-Golang-brightred.svg) ![](https://img.shields.io/badge/学习方式-在线阅读-brightgreen.svg) ![](https://img.shields.io/github/stars/coredumptoday/gopherhole.svg)
 
