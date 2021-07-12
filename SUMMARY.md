@@ -6,5 +6,6 @@
 
 ## 哈希 <a id="ha-xi-1"></a>
 
-* [Untitled](ha-xi-1/untitled.md)
+* [0-interfaces](ha-xi-1/untitled.md)
+* [crypto/md5](ha-xi-1/crypto-md5.md)
 
