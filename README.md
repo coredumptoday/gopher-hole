@@ -64,3 +64,4 @@ $$
 {% endapi-method-spec %}
 {% endapi-method %}
 
+<img src="https://ghbtns.com/github-btn.html?user=coredumptoday&repo=gopherhole&type=star&count=true" width="150" height="20" title="GitHub" />
