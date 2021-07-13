@@ -16,7 +16,7 @@ type Hash interface {
 
 作用：写入需要进行hash计算的任意长度数据，可以多次调用追加写入，**如果写入数据长度为BlockSize整数倍，则计算性能更好**
 
-> Hash接口定义中内嵌了`io.Writer`接口，具体定义为`Write(p []byte) (n int, err error)`，但是和`io.Writer`不同的是，`error`永远为`nil`，使用时可以不做错误处理
+> Hash接口定义中内嵌了`io.Writer`接口，具体定义为`Write(p []byte) (n int, err error)`，但是和`io.Writer`不同的是，`error`永远为`nil`，使用时可以不做错误处理。**在扩展开发中也需要注意不要返回任何`error`**
 
 `Sum`
 

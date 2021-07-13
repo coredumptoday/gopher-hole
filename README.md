@@ -1,71 +1,11 @@
----
-description: ffffff
----
-
 # 前言
 
-![](https://img.shields.io/badge/Language-Golang-brightred.svg) ![](https://img.shields.io/badge/学习方式-在线阅读-brightgreen.svg) ![](https://img.shields.io/github/stars/coredumptoday/gopherhole.svg)
+![](https://img.shields.io/badge/Language-Golang-brightred.svg)
+![](https://img.shields.io/badge/学习方式-在线阅读-brightgreen.svg)
+![](https://img.shields.io/github/stars/coredumptoday/gopherhole.svg)
 
-{% hint style="success" %}
-aaa
-{% endhint %}
+记录一些`Golang`使用过程中遇到的一些问题，以及部分方法的具体实现和原理，帮助大家更好的理解和使用`Golang`
 
-{% tabs %}
-{% tab title="Plain Text" %}
-```text
-dfsdf
-```
-{% endtab %}
+![LetUsGo](./images/readme.jpg)
 
-{% tab title="" %}
-```text
-
-```
-{% endtab %}
-{% endtabs %}
-
-$$
-a &^ b
-$$
-
-|  |  |  |
-| :---: | :---: | :---: |
-|  |  |  |
-|  |  |  |
-
-> 1.
-
-{% api-method method="get" host="" path="" %}
-{% api-method-summary %}
-
-{% endapi-method-summary %}
-
-{% api-method-description %}
-
-{% endapi-method-description %}
-
-{% api-method-spec %}
-{% api-method-request %}
-{% api-method-path-parameters %}
-{% api-method-parameter name="" type="string" required=false %}
-
-{% endapi-method-parameter %}
-{% endapi-method-path-parameters %}
-{% endapi-method-request %}
-
-{% api-method-response %}
-{% api-method-response-example httpCode=200 %}
-{% api-method-response-example-description %}
-
-{% endapi-method-response-example-description %}
-
-```text
-
-```
-{% endapi-method-response-example %}
-{% endapi-method-response %}
-{% endapi-method-spec %}
-{% endapi-method %}
-
-![](https://ghbtns.com/github-btn.html?user=coredumptoday&repo=gopherhole&type=star&count=true)
-
+[GitRepo传送门](https://github.com/coredumptoday/whack-a-gopher)
