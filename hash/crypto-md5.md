@@ -47,7 +47,7 @@ fmt.Printf("%x\n", h.Sum(nil))
 
 ## MD5处理流程
 
-![](../.gitbook/assets/md5-process.png)
+![MD5&#x5904;&#x7406;&#x6D41;&#x7A0B;&#x793A;&#x610F;&#x56FE;](../.gitbook/assets/md5-process.png)
 
 1. 初始化第一个分组所需要的MD5值（4个uint32的魔数）
 2. 整个待签名的数据需要先做分组处理，每64个byte为一组，如果末尾不足64个，需要进行填充
