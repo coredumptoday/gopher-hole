@@ -2,6 +2,7 @@
 
 ## hash.Hash
 
+{% code title="src/hash/hash.go" %}
 ```go
 type Hash interface {
     io.Writer
@@ -11,6 +12,7 @@ type Hash interface {
     BlockSize() int
 }
 ```
+{% endcode %}
 
 在`src/hash/hash.go`文件中提供了Hash接口的定义，所有Hash类必须实现该接口，下面简单介绍一下每个方法的功能
 
@@ -42,6 +44,7 @@ type Hash interface {
 
 除了`Hash`接口之外，hash函数还需要实现`src/encoding/encoding.go`中定义的两个接口，接口定义如下：
 
+{% code title="src/encoding/encoding.go" %}
 ```go
 type BinaryMarshaler interface {
     MarshalBinary() (data []byte, err error)
@@ -50,6 +53,7 @@ type BinaryUnmarshaler interface {
     UnmarshalBinary(data []byte) error
 }
 ```
+{% endcode %}
 
 从接口名称就可以看出，这是实现`序列化`和`反序列化`的接口
 
