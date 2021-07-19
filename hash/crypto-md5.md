@@ -14,12 +14,14 @@ MD5 算法的密码学可靠性已经被攻破，不适用于安全应用
 
 {% code title="src/crypto/md5.go" %}
 ```go
-const BlockSize = 64
-const Size = 16
+const BlockSize = 64    //分组大小
+const Size = 16         //输出大小
 ```
 {% endcode %}
 
 ## 示例
+
+### 计算字符串MD5值
 
 {% tabs %}
 {% tab title="包调用方式" %}
@@ -45,7 +47,15 @@ fmt.Printf("%x\n", h.Sum(nil))
 {% endtab %}
 {% endtabs %}
 
-## MD5处理流程
+### 计算文件MD5值
+
+```go
+
+```
+
+## Golang中MD5的实现方式
+
+### MD5处理流程
 
 ![MD5&#x5904;&#x7406;&#x6D41;&#x7A0B;&#x793A;&#x610F;&#x56FE;](../.gitbook/assets/md5-process.png)
 
@@ -53,7 +63,7 @@ fmt.Printf("%x\n", h.Sum(nil))
 2. 整个待签名的数据需要先做分组处理，每64个byte为一组，如果末尾不足64个，需要进行填充
 3. 将上一分组的MD5值（第一组没有上一分组就用初始化的MD5）和本分组数据作为输入，经过4轮位移计算生成新的MD5值，如果是最后的分组，该值就是最终的输出
 
-## Go提供的MD5生成方式
+### Go提供的MD5生成方式
 
 Go文档中提供了两种生成MD5的方式
 
@@ -92,7 +102,7 @@ func main() {
 
 既然有两种使用方式，那就应该有对应的应用场景，要不为什么要写两种？
 
-## Go中MD5的实现方式
+### Go中MD5的实现方式
 
 ### 1. digest结构体
 
