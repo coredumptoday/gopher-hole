@@ -22,7 +22,7 @@ const Size = 16
 ## 示例
 
 {% tabs %}
-{% tab title="方式一" %}
+{% tab title="包调用方式" %}
 ```go
 data := []byte("These pretzels are making me thirsty.")
 fmt.Printf("%x\n", md5.Sum(data))
@@ -32,7 +32,7 @@ fmt.Printf("%x\n", md5.Sum(data))
 ```
 {% endtab %}
 
-{% tab title="方式二" %}
+{% tab title="对象调用方式" %}
 ```go
 h := md5.New()
 h.Write([]byte("These pretzels are"))
