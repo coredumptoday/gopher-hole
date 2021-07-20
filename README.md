@@ -1,6 +1,9 @@
 # 前言
 
-![](https://img.shields.io/badge/Language-Golang-brightred.svg) ![](https://img.shields.io/badge/学习方式-在线阅读-brightgreen.svg) ![](https://img.shields.io/github/stars/coredumptoday/gopherhole.svg)
+![](https://img.shields.io/badge/Language-Golang-brightred.svg)
+![](https://img.shields.io/badge/Version-1.16.4-brightred.svg)
+![](https://img.shields.io/badge/学习方式-在线阅读-brightgreen.svg)
+![](https://img.shields.io/github/stars/coredumptoday/gopherhole.svg)
 
 ![Let&apos;s Go](.gitbook/assets/readme.png)
 

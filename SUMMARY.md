@@ -6,7 +6,7 @@
 
 * [接口说明](hash/interfaces.md)
 * [md5](hash/md5.md)
-* [crypto/sha-1](hash/crypto-sha-1.md)
+* [sha1](hash/sha1.md)
 * [crypto/sha-2](hash/crypto-sha-2.md)
 * [crypto/Hash](hash/crypto-hash.md)
 * [长度扩展攻击](hash/chang-du-kuo-zhan-gong-ji.md)
