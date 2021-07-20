@@ -38,7 +38,7 @@ fmt.Printf("%x\n", md5.Sum(data))
 ```
 {% endcode %}
 
-{% code title="方法签名" %}
+{% code title="md5.Sum方法签名" %}
 ```go
 func Sum(data []byte) [Size]byte
 ```
@@ -64,6 +64,7 @@ fmt.Printf("%x\n", h.Sum(nil))
 
 ### 计算文件MD5值
 
+{% code title="计算文件MD5值" %}
 ```go
 f, err := os.Open("file.txt")
 if err != nil {
@@ -78,6 +79,7 @@ if _, err := io.Copy(h, f); err != nil {
 
 fmt.Printf("%x\n", h.Sum(nil))
 ```
+{% endcode %}
 
 文件MD5值计算是以`对象调用方式`追加写的形式实现的
 
