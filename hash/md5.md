@@ -38,9 +38,11 @@ fmt.Printf("%x\n", md5.Sum(data))
 ```
 {% endcode %}
 
+{% code title="方法签名" %}
 ```go
 func Sum(data []byte) [Size]byte
 ```
+{% endcode %}
 
 根据方法签名，调用时需要传入待计算的字符串，返回值为一个`Size`大小的`byte`数组
 
