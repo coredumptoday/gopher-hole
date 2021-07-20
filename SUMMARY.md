@@ -2,7 +2,7 @@
 
 * [前言](README.md)
 
-## 哈希 <a id="hash"></a>
+## 哈希
 
 * [接口说明](hash/interfaces.md)
 * [crypto/md5](hash/crypto-md5.md)
@@ -14,8 +14,8 @@
 
 ## 对称加密
 
-* [crypto/aes](dui-cheng-jia-mi/crypto-aes.md)
-* [crypto/des](dui-cheng-jia-mi/crypto-des.md)
+* [crypto/des](symmetric-cipher/crypto-des.md)
+* [crypto/aes](symmetric-cipher/crypto-aes.md)
 
 ---
 
