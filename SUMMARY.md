@@ -5,7 +5,7 @@
 ## 哈希
 
 * [接口说明](hash/interfaces.md)
-* [crypto/md5](hash/crypto-md5.md)
+* [md5](hash/md5.md)
 * [crypto/sha-1](hash/crypto-sha-1.md)
 * [crypto/sha-2](hash/crypto-sha-2.md)
 * [crypto/Hash](hash/crypto-hash.md)
