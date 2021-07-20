@@ -194,3 +194,26 @@ func (d *digest) Write(p []byte) (nn int, err error) {
     return
 }
 ```
+
+### ConstantTimeSum
+
+{% code title="ConstantTimeSum" %}
+```go
+type constantSum interface {
+    ConstantTimeSum(in []byte) []byte
+}
+h := sha1.New()
+h.Write([]byte("These pretzels are"))
+h.Write([]byte(" making me thirsty."))
+fmt.Printf("%x\n", h.(constantSum).ConstantTimeSum(nil))
+
+//output
+//7a0f82aac45ddc67ac3652f01fb5f731ec8f64a6
+```
+{% endcode %}
+
+`sha1.digest`对象还包含一个`ConstantTimeSum`方法，该方法是`Sum`方法的替代，根据官方说明`ConstantTimeSum`的计算结果和`Sum`一致，但是运行是**常量时间**
+
+{% hint style="warning" %}
+防止基于时间的侧信道攻击请使用`ConstantTimeSum`，Golang自身`tls`计算`hmac-sha1`使用的就是`ConstantTimeSum`
+{% endhint %}
