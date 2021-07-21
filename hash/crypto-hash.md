@@ -43,6 +43,8 @@ const (
 
 ## 示例
 
+`crypto.Hash`以`对象调用方式`提供了哈希值计算通用的方法，便于封装和二次开发
+
 {% tabs %}
 {% tab title="MD5" %}
 ```go
@@ -97,7 +99,12 @@ if crypto.SHA512.Available() {
 {% endtab %}
 {% endtabs %}
 
-`crypto.Hash`以`对象调用方式`提供了哈希值计算通用的方法，便于封装和二次开发
+### 方法说明
+`Available`: 返回该哈希算法是否已经调用`crypto.RegisterHash`进行了注册
+
+`Size`: 返回该哈希算法计算结果占用字节数
+
+`New`: 根据哈希算法注册的实例化方法，返回实例化的`digest`对象
 
 {% hint style="warning" %}
 `crypto.Hash`提供的方法进行哈希值计算时需要导入具体的实现包，运行其中的`init`方法完成注册
