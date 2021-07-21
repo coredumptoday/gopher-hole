@@ -27,7 +27,7 @@ const Size = 16
 
 Go提供了两种计算MD5的调用方式
 
-{% code title="md5包方法调用" %}
+{% code title="MD5包方法调用" %}
 ```go
 data := []byte("These pretzels are")
 data = append(data, " making me thirsty."...)
@@ -144,7 +144,7 @@ Go语言中MD5的计算都依赖于`digest`结构体
 
 #### 方法调用流程
 
-无论是`md5包方法调用`还是`对象调用方式`，底层的调用逻辑基本一致
+无论是`MD5包方法调用`还是`对象调用方式`，底层的调用逻辑基本一致
 
 1. New一个`digest`对象
 2. 调用`digest.Reset`方法，对结构体中的变量赋初值
