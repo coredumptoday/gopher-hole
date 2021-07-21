@@ -50,7 +50,7 @@ if crypto.MD5.Available() {
     h := crypto.MD5.New()
     h.Write([]byte("These pretzels are"))
     h.Write([]byte(" making me thirsty."))
-    fmt.Printf("%x\n", h.Sum(nil))
+    fmt.Printf("%x, len: %d\n", h.Sum(nil), crypto.MD5.Size() * 2)
 }else {
     fmt.Printf("Need import %s package\n", crypto.MD5.String())
 }
@@ -63,9 +63,9 @@ if crypto.SHA1.Available() {
     h := crypto.SHA1.New()
     h.Write([]byte("These pretzels are"))
     h.Write([]byte(" making me thirsty."))
-    fmt.Printf("%x\n", h.Sum(nil))
+    fmt.Printf("%x, len: %d\n", h.Sum(nil), crypto.SHA1.Size() * 2)
 }else {
-    fmt.Printf("Need import %s package\n", crypto.MD5.String())
+    fmt.Printf("Need import %s package\n", crypto.SHA1.String())
 }
 ```
 {% endtab %}
@@ -76,28 +76,28 @@ if crypto.SHA256.Available() {
     h := crypto.SHA256.New()
     h.Write([]byte("These pretzels are"))
     h.Write([]byte(" making me thirsty."))
-    fmt.Printf("%x\n", h.Sum(nil))
+    fmt.Printf("%x, len: %d\n", h.Sum(nil), crypto.SHA256.Size() * 2)
 }else {
-    fmt.Printf("Need import %s package\n", crypto.MD5.String())
+    fmt.Printf("Need import %s package\n", crypto.SHA256.String())
 }
 ```
 {% endtab %}
 
 {% tab title="SHA512" %}
 ```go
-if crypto.SHA256.Available() {
+if crypto.SHA512.Available() {
     h := crypto.SHA512.New()
     h.Write([]byte("These pretzels are"))
     h.Write([]byte(" making me thirsty."))
-    fmt.Printf("%x\n", h.Sum(nil))
+    fmt.Printf("%x, len: %d\n", h.Sum(nil), crypto.SHA512.Size() * 2)
 }else {
-    fmt.Printf("Need import %s package\n", crypto.MD5.String())
+    fmt.Printf("Need import %s package\n", crypto.SHA512.String())
 }
 ```
 {% endtab %}
 {% endtabs %}
 
-`crypto.Hash`以`对象调用方式`提供了哈希值计算通用的方法，便于使用和二次开发
+`crypto.Hash`以`对象调用方式`提供了哈希值计算通用的方法，便于封装和二次开发
 
 {% hint style="warning" %}
 `crypto.Hash`提供的方法进行哈希值计算时需要导入具体的实现包，运行其中的`init`方法完成注册
