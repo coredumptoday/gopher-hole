@@ -20,5 +20,5 @@
 
 ---
 
-* [GitRepo](https://github.com/coredumptoday/whack-a-gopher)
+* [打地鼠GitRepo](https://github.com/coredumptoday/whack-a-gopher)
 
