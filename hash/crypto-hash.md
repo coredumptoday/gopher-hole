@@ -107,7 +107,7 @@ if crypto.SHA512.Available() {
 `New`: 根据哈希算法注册的实例化方法，返回实例化的`digest`对象
 
 {% hint style="warning" %}
-`crypto.Hash`提供的方法进行哈希值计算时需要导入具体的实现包，运行其中的`init`方法完成注册
+在使用`crypto.Hash`提供的方法进行哈希值计算时，需要导入具体的算法实现包，运行其中的`init`方法完成注册
 ```go
 import (
     _ "crypto/md5"
@@ -120,7 +120,7 @@ import (
 {% endhint %}
 
 {% hint style="warning" %}
-`crypto.Hash`在使用过程中会校验不通过会触发`panic`，需要做好对应的处理工作
+`crypto.Hash`在使用过程中有肯能触发`panic`，需要做好对应的处理工作
 {% endhint %}
 
 ## 注册
@@ -171,4 +171,4 @@ func init() {
 {% endtab %}
 {% endtabs %}
 
-每种哈希算法在具体的实现包中调用`crypto.RegisterHash`方法，将自己的实例化方法进行了注册
+每种哈希算法在具体的实现包中调用了`crypto.RegisterHash`方法，将自己的实例化方法进行了注册
