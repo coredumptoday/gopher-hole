@@ -10,7 +10,7 @@
 * [sha256/224](hash/sha256.md)
 * [sha512/384/256/224](hash/sha512.md)
 * [crypto.Hash](hash/crypto-hash.md)
-* [长度扩展攻击](hash/chang-du-kuo-zhan-gong-ji.md)
+* [长度扩展攻击](hash/length-extension-attacks.md)
 * [crypto/hmac](hash/crypto-hmac.md)
 
 ## 对称加密
