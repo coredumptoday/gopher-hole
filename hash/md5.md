@@ -180,11 +180,24 @@ func (d *digest) Write(p []byte) (nn int, err error) {
 	//如果 p 能凑够至少一个分组，就进行计算
 	if len(p) >= BlockSize {
 		n := len(p) &^ (BlockSize - 1)
-        /*
-         * n := (len(p) / BlockSize) * BlockSize
-         * 该方式和上面结果等价，作用是计算n的位置，n
-         * 前的数据是 BlockSize 的整数倍，n到结尾的
-         * 据是凑不够 BlockSize 大小的数据
+        /* 等式解析
+         * n := len(p) &^ (BlockSize - 1)
+         * -> len(p) ^ (len(p) & (BlockSize - 1))
+         * -> len(p) ^ (len(p) % BlockSize)
+         *
+         * 计算过程解析
+         * 已知 BlockSize = 64，二进制表示为 0000000001000000
+         * len(p) % 64，取值范围是 0 ~ 63，
+         * 二进制会落在 0000000001[000000] 低位的六个 0 的范围内
+         * 所以 xxxxxxxxxxxxxxxx
+         *   % 0000000001000000
+         * 可以转换为 xxxxxxxxxxxxxxxx
+         *        & 0000000000111111
+         *        -------------------- len(p) & (BlockSize - 1)
+         *    结果   0000000000xxxxxx
+         *        ^ xxxxxxxxxxxxxxxx
+         *        -------------------- len(p) ^ (len(p) & (BlockSize - 1))
+         *    结果   xxxxxxxxxx000000   n = BlockSize的最大整数倍
          *
          * go源码中位运算的方式效率更高，但是需要的条
          * 是 BlockSize 必须是 2^n 这种形式
