@@ -199,26 +199,26 @@ func (d *digest) Write(p []byte) (nn int, err error) {
     if len(p) >= chunk {
         n := len(p) &^ (chunk - 1)
         /* 等式解析
-         * n := len(p) &^ (BlockSize - 1)
-         * -> len(p) ^ (len(p) & (BlockSize - 1))
-         * -> len(p) ^ (len(p) % BlockSize)
+         * n := len(p) &^ (chunk - 1)
+         * -> len(p) ^ (len(p) & (chunk - 1))
+         * -> len(p) ^ (len(p) % chunk)
          *
          * 计算过程解析
-         * 已知 BlockSize = 64，二进制表示为 0000000001000000
+         * 已知 chunk = 64，二进制表示为 0000000001000000
          * len(p) % 64，取值范围是 0 ~ 63，
          * 二进制会落在 0000000001[000000] 低位的六个 0 的范围内
          * 所以      xxxxxxxxxxxxxxxx  -> len(p)
-         *        % 0000000001000000  -> BlockSize
+         *        % 0000000001000000  -> chunk
          * 可以转换为 xxxxxxxxxxxxxxxx  -> len(p)
-         *        & 0000000000111111  -> BlockSize - 1
+         *        & 0000000000111111  -> chunk - 1
          *        --------------------
-         *    结果   0000000000xxxxxx  -> len(p) & (BlockSize - 1)
+         *    结果   0000000000xxxxxx  -> len(p) & (chunk - 1)
          *        ^ xxxxxxxxxxxxxxxx  -> len(p)
          *        --------------------
-         *    结果   xxxxxxxxxx000000   n = len(p)中BlockSize的最大整数倍
+         *    结果   xxxxxxxxxx000000   n = len(p)中 chunk 的最大整数倍
          *
          * go源码中位运算的方式效率更高，但是需要的条
-         * 是 BlockSize 必须是 2^n 这种形式
+         * 是 chunk 必须是 2^n 这种形式
          */
         block(d, p[:n])	//block方法中会根据CPU参数判断执行汇编方法还是go方法
         //更改偏移量，将进行过计算的数据去掉

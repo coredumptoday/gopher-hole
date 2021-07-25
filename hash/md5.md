@@ -232,12 +232,15 @@ func (d *digest) Write(p []byte) (nn int, err error) {
 //tmp数组第 0 个位置为 0x80，其他位置均为 0 值，0x80是超出ASCII范围的第一个值
 tmp := [1 + 63 + 8]byte{0x80}
 
-// 计算pad的值，这段比较不好理解，可以参考sha1或者sha256相应的写法
+// 计算pad的值，这段比较不好理解，
+// 可以参考sha1或者sha256相应的写法，比这种写法容易理解
+pad := (55 - d.len) % 64
+
 // 分两种情况讨论 d.len <= 55 比较好理解，不做解释
 // 当 d.len > 55 时，计算为负数，由于 d.len 是uint64，相减结果只能为正数，这样就演变成借位减法
 // 55 - d.len < 0 时 代码演变为 (2^64 + 55 - d.len) % 64
 // 只要 2^n + 55 >= d.len，n就成立，n=64是因为uint64的原因
-pad := (55 - d.len) % 64
+
 binary.LittleEndian.PutUint64(tmp[1+pad:], d.len<<3)
 // 1 << 3 = 8 => d.len << 3 == d.len * 8 = 输入数据的比特位数量
 d.Write(tmp[:1+pad+8])
