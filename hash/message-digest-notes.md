@@ -186,3 +186,8 @@ if checkSum(newSign, []byte(KEY+data+string(padding)+injectData), crypto.SHA512)
 `MD5` `SHA1` `SHA256` `SHA512`会完全命中上面所说的问题。
 
 相对的，像`SHA224` `SHA384` `SHA512/224` `SHA512/256`由于返回值做了截取，如果发动`扩展长度攻击`需要穷举大量的数据，成功率不高
+
+{% hint style="success" %}
+**Hash-based Message Authentication Code**
+相对优雅的解决`身份+完整性`的验证，请使用`hmac`，基于Hash函数和密钥进行消息认证的方法
+{% endhint %}
