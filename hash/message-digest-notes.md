@@ -36,9 +36,9 @@
 
 ### 填充方式在Golang中的问题
 
-- `Golang`中用一个`uint64`变量来记录处理的`字节数`，在生成填充数据的时候需要乘以`8`转换成`bit`数，如果记录的`字节数`超过了`uint64`最大值的`1/8`就会产生溢出
+1. `Golang`中用一个`uint64`变量来记录处理的`字节数`，在生成填充数据的时候需要乘以`8`转换成`bit`数，如果记录的`字节数`超过了`uint64`最大值的`1/8`就会产生溢出
   
-- `Golang`中处理`SHA512/224` `SHA512/256` `SHA384` `SHA512`系列方法时，同样用的`uint64`记录处理的`字节数`，除了上述问题之外，`uint64`记录的`字节数`小于规定的最大值`2^128`个`bit`，也就是说`Golang`中的`SHA512`系列方法，只能处理`2^64`个`bit`，远比规定的极限值要小很多
+2. `Golang`中处理`SHA512/224` `SHA512/256` `SHA384` `SHA512`系列方法时，同样用的`uint64`记录处理的`字节数`，除了上述问题之外，`uint64`记录的`字节数`小于规定的最大值`2^128`个`bit`，也就是说`Golang`中的`SHA512`系列方法，只能处理`2^64`个`bit`，远比规定的极限值要小很多
 
 
 ## 长度扩展攻击
@@ -60,12 +60,15 @@ hash(机密数据 + 请求参数)
 ### 签名方式说明
 假定现在有一个批量获取订单数据的接口，采用`AppId` `AppKey`的模式签名，具体方式如下
 
-1. 从服务方获得`AppId` `AppKey`
-2. 请求参数`appid=xxxxx` `orderids=xxxxxx,xxxxx`，按照key升序排列拼接成待签名字符串
+- 从服务方获得`AppId` `AppKey`
+- 请求参数`appid=xxxxx` `orderids=xxxxxx,xxxxx`，按照key升序排列拼接成待签名字符串
+
 ```text
 appid=xxxxx&orderids=xxxxxx,xxxxx
 ```
-3. 请求时构造签名参数，规则如下：
+
+- 请求时构造签名参数，规则如下：
+
 ```text
 sign = hash(AppKey + appid=xxxxx&orderids=xxxxxx,xxxxx)
 
