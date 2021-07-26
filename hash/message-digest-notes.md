@@ -45,26 +45,37 @@
 
 在日常的开发中，很有可能会开发一些接口给第三方使用，为了保证数据在传输过程中不被篡改，一般会考虑对请求参数做`签名验证`
 
-对数据做哈希签名只能解决数据`完整性`问题，但不能确认是否是真实第三方发出的，为了解决身份认证的问题，会在签名前的数据中加入第三方和服务方共有的数据，这样服务方收到数据后既能验证第三方的身份又能保证数据的完整性
+对数据做哈希签名只能解决数据`完整性`问题，但不能确认是否是真实第三方发出的，为了解决身份认证的问题，会在签名前的数据中加入第三方和服务方共有的`机密数据`，这样服务端收到数据后既能验证第三方的身份又能保证数据的完整性
 
-## 常见的接口签名方式
-
-最常见的接口签名方式可能就是`AppId` `AppKey`模式了
-
-1. 从服务方获得`AppId` `AppKey`
-2. 请求时构造签名参数，规则如下：
+{% hint style="warning" %}
 ```text
-sign = hash(AppKey + appid=AppId&a=a&b=b&c=c)
-curl xxx.com?appid=AppId&a=a&b=b&c=c&sign=sign
+hash(机密数据 + 请求参数)
 ```
-
-伪代码中`hash`方法包括，但不限于`MD5` `SHA1` `SHA2系列`等，之所以单独说了这几种哈希算法是因为他们都是基于`Merkle–Damgård`构造模式进行哈希计算的，具体的流程可以翻看前面的示意图
-
-这种基于`Merkle–Damgård`构造模式的哈希算法，如果将`AppKey`放在签名就有`长度扩展攻击`的风险
+这种`机密数据`放在前面的就会有`长度扩展攻击`风险
+{% endhint %}
 
 ## 攻击原理
 
 ## 示例
+### 签名方式说明
+假定现在有一个批量获取订单数据的接口，采用`AppId` `AppKey`的模式签名，具体方式如下
+
+1. 从服务方获得`AppId` `AppKey`
+2. 请求参数`appid=xxxxx` `orderids=xxxxxx,xxxxx`，按照key升序排列拼接成待签名字符串
+```text
+appid=xxxxx&orderids=xxxxxx,xxxxx
+```
+3. 请求时构造签名参数，规则如下：
+```text
+sign = hash(AppKey + appid=xxxxx&orderids=xxxxxx,xxxxx)
+
+生成的请求链接为
+xxx.com?appid=xxxxx&orderids=xxxxxx,xxxxx&sign=sign
+```
+
+伪代码中`hash`方法包括，但不限于`MD5` `SHA1` `SHA2系列`等，之所以单独说了这几种哈希算法是因为他们都是基于`Merkle–Damgård`构造模式进行哈希计算的，具体的流程可以翻看前面的示意图
+
+### 配套代码
 
 {% tabs %}
 {% tab title="MD5" %}
@@ -171,3 +182,7 @@ if checkSum(newSign, []byte(KEY+data+string(padding)+injectData), crypto.SHA512)
 ```
 {% endtab %}
 {% endtabs %}
+
+`MD5` `SHA1` `SHA256` `SHA512`会完全命中上面所说的问题。
+
+相对的，像`SHA224` `SHA384` `SHA512/224` `SHA512/256`由于返回值做了截取，如果发动`扩展长度攻击`需要穷举大量的数据，成功率不高
