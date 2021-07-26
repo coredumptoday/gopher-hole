@@ -192,5 +192,6 @@ if checkSum(newSign, []byte(KEY+data+string(padding)+injectData), crypto.SHA512)
 
 {% hint style="success" %}
 **Hash-based Message Authentication Code**
+
 相对优雅的解决`身份+完整性`的验证，请使用`hmac`，基于Hash函数和密钥进行消息认证的方法
 {% endhint %}
