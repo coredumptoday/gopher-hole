@@ -49,7 +49,6 @@
 
 {% hint style="warning" %}
 这种`机密数据`放在前面的就会有`长度扩展攻击`风险
-
 ```text
 hash(机密数据 + 请求参数)
 ```
@@ -67,7 +66,6 @@ hash(机密数据 + 请求参数)
 appid=xxxxx&orderids=xxxxxx,xxxxx
 ```
 3. 请求时构造签名参数，规则如下：
-
 ```text
 sign = hash(AppKey + appid=xxxxx&orderids=xxxxxx,xxxxx)
 
