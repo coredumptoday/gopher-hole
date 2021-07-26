@@ -48,10 +48,11 @@
 对数据做哈希签名只能解决数据`完整性`问题，但不能确认是否是真实第三方发出的，为了解决身份认证的问题，会在签名前的数据中加入第三方和服务方共有的`机密数据`，这样服务端收到数据后既能验证第三方的身份又能保证数据的完整性
 
 {% hint style="warning" %}
+这种`机密数据`放在前面的就会有`长度扩展攻击`风险
+
 ```text
 hash(机密数据 + 请求参数)
 ```
-这种`机密数据`放在前面的就会有`长度扩展攻击`风险
 {% endhint %}
 
 ## 攻击原理
@@ -66,10 +67,11 @@ hash(机密数据 + 请求参数)
 appid=xxxxx&orderids=xxxxxx,xxxxx
 ```
 3. 请求时构造签名参数，规则如下：
+
 ```text
 sign = hash(AppKey + appid=xxxxx&orderids=xxxxxx,xxxxx)
 
-生成的请求链接为
+//生成的请求链接为
 xxx.com?appid=xxxxx&orderids=xxxxxx,xxxxx&sign=sign
 ```
 
