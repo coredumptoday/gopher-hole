@@ -54,7 +54,14 @@ hash(机密数据 + 请求参数)
 ```
 {% endhint %}
 
-## 攻击原理
+## 攻击构造原理
+![哈希长度扩展攻击示意图](../images/hash/hash-length-extension-attack.png)
+
+- 图中灰色部分是明文传输，属于已知部分
+- 橙色部分为`机密数据`，内容未知，但是我们并不需要内容，而只需要`机密数据`的长度，这部分数据的长度可以根据服务端文档进行猜测
+- 黄色的`填充`数据，规则已知，可以自行构造
+
+攻击数据构造就是根据`请求参数`及明文传输的`摘要值`（图中灰色部分），构造该摘要算法计算完某个`BlockSize`之后的中间状态，继续写入`攻击数据`进行新一轮的迭代，生成`新摘要`，并将新生成的带攻击数据的参数和新摘要替换原有数据进行请求攻击
 
 ## 示例
 ### 签名方式说明
@@ -189,6 +196,11 @@ if checkSum(newSign, []byte(KEY+data+string(padding)+injectData), crypto.SHA512)
 `MD5` `SHA1` `SHA256` `SHA512`会完全命中上面所说的问题。
 
 相对的，像`SHA224` `SHA384` `SHA512/224` `SHA512/256`由于返回值做了截取，如果发动`扩展长度攻击`需要穷举大量的数据，成功率不高
+
+{% hint style="success" %}
+详细代码参见[hashpump](https://github.com/coredumptoday/hashpump)
+支持 MD5、SHA1、SHA256、SHA512 签名方法
+{% endhint %}
 
 {% hint style="success" %}
 **Hash-based Message Authentication Code**
