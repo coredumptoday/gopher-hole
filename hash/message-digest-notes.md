@@ -13,7 +13,7 @@
 | SHA384 | 192 | 384 |
 | SHA512 | 256 | 512 |
 
-安全强度是信息摘要算法衡量安全性的指标，通常用`位`来表述，代表的意义就是`N 位的安全强度表示破解一个算法需要 2^N(2 的 N 次方) 次的运算`
+安全强度是信息摘要算法衡量安全性的指标，通常用`位`来表述，代表的意义就是**N 位的安全强度表示破解一个算法需要 2^N(2 的 N 次方) 次的运算**
 
 根据`NIST`建议，`112`位安全强度的信息摘要算法可以在`2030`年之前使用，对照表中记录`MD5` `SHA1`已经不适用于安全应用，`SHA224` `SHA512/224`在`2030`年之前相对安全，其他的可以沿用至`2030`年之后
 
@@ -90,7 +90,8 @@ xxx.com?appid=xxxxx&orderids=xxxxxx,xxxxx&sign=sign
 {% tabs %}
 {% tab title="MD5" %}
 ```go
-data := "orderIds=11111,999"
+const KEY = "43f55d8396d0982fd62666883a9b3730"
+data := "appid=1&orderIds=11111,999"
 injectData := ",22222,33333"
 
 md5Sign := md5.Sum([]byte(KEY + data))
@@ -116,7 +117,8 @@ if checkSum(newSign, []byte(KEY+data+string(padding)+injectData), crypto.MD5) {
 
 {% tab title="SHA1" %}
 ```go
-data := "orderIds=11111,999"
+const KEY = "43f55d8396d0982fd62666883a9b3730"
+data := "appid=1&orderIds=11111,999"
 injectData := ",22222,33333"
 
 sha1Sign := sha1.Sum([]byte(KEY + data))
@@ -142,7 +144,8 @@ if checkSum(newSign, []byte(KEY+data+string(padding)+injectData), crypto.SHA1) {
 
 {% tab title="SHA256" %}
 ```go
-data := "orderIds=11111,999"
+const KEY = "43f55d8396d0982fd62666883a9b3730"
+data := "appid=1&orderIds=11111,999"
 injectData := ",22222,33333"
 
 sha256Sign := sha256.Sum256([]byte(KEY + data))
@@ -168,7 +171,8 @@ if checkSum(newSign, []byte(KEY+data+string(padding)+injectData), crypto.SHA256)
 
 {% tab title="SHA512" %}
 ```go
-data := "orderIds=11111,999"
+const KEY = "43f55d8396d0982fd62666883a9b3730"
+data := "appid=1&orderIds=11111,999"
 injectData := ",22222,33333"
 
 sha512Sign := sha512.Sum512([]byte(KEY + data))
