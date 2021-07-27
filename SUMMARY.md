@@ -10,7 +10,7 @@
 * [sha256/224](hash/sha256.md)
 * [sha512/384/256/224](hash/sha512.md)
 * [crypto.Hash](hash/crypto-hash.md)
-* [常用单向散列函数的注意事项](hash/message-digest-notes.md)
+* [常用信息摘要算法的注意事项](hash/message-digest-notes.md)
 * [crypto/hmac](hash/crypto-hmac.md)
 
 ## 对称加密
