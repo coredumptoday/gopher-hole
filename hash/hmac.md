@@ -18,6 +18,15 @@ hmac包实现了美国联邦信息处理标准198出版物中定义的键控哈�
 
 ## MAC值计算方式
 
-![SHA1处理流程示意图](../images/hash/sha1/sha1-calc-process.png)
+![HMAC处理流程示意图](../images/hash/hmac/hmac-calc-process.png)
 
 ### Go语言实现
+#### marshalable 接口
+{% code title="hmac.marshalable" %}
+```go
+type marshalable interface {
+    MarshalBinary() ([]byte, error)
+    UnmarshalBinary([]byte) error
+}
+```
+{% endcode %}
