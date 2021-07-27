@@ -202,7 +202,7 @@ if checkSum(newSign, []byte(KEY+data+string(padding)+injectData), crypto.SHA512)
 相对的，像`SHA224` `SHA384` `SHA512/224` `SHA512/256`由于返回值做了截取，如果发动`扩展长度攻击`需要穷举大量的数据，成功率不高
 
 {% hint style="info" %}
-详细代码参见[hashpump git repo](https://github.com/coredumptoday/hashpump)
+详细代码实现参见 [hashpump](https://github.com/coredumptoday/hashpump)
 
 支持 `MD5` `SHA1` `SHA256` `SHA512` 攻击参数构造
 {% endhint %}
