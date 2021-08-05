@@ -48,7 +48,7 @@
 
 对应的解决方式就是`subtle`包，`subtle`包中方法经常被用于加密相关代码，但是官方提示要**谨慎使用**
 
-{% code title="ConstantTimeCompare" %}
+{% code title="subtle.ConstantTimeCompare判等" %}
 ```go
 subtle.ConstantTimeCompare(byteSlice1, byteSlice2) == 1
 ```
