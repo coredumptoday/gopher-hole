@@ -48,9 +48,9 @@
 
 对应的解决方式就是`subtle`包，`subtle`包中方法经常被用于加密相关代码，但是官方提示要**谨慎使用**
 
-{% code title="subtle.ConstantTimeCompare判等" %}
+{% code title="使用 subtle.ConstantTimeCompare 判等示例" %}
 ```go
-subtle.ConstantTimeCompare(byteSlice1, byteSlice2) == 1
+subtle.ConstantTimeCompare(byteSlice1, byteSlice2) == 1 //全等为true
 ```
 {% endcode %}
 
